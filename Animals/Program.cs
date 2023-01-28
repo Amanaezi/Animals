@@ -10,8 +10,9 @@ namespace Animals
         static void Main(string[] args)
         {
             string path = "result.txt";
-            StreamWriter Writer = new StreamWriter(path, false);
             int i = 0;
+
+            StreamWriter Writer = new StreamWriter(path, false);
             Random rnd = new Random();
 
             List<Animal> animals = new List<Animal>()
@@ -33,9 +34,11 @@ namespace Animals
                 var food = animal.Food();
             }
 
+
             var sort = from anm in animals
                        orderby anm.Count, anm.Name
                        select anm;
+
 
             foreach (var animal in sort)
             {
@@ -56,29 +59,27 @@ namespace Animals
                     Writer.WriteLine($"Omnivores {animal.Name} eats {animal.Count} kg of {food.Item1}");
                     Writer.WriteLine();
                 }
-
             }
 
             foreach (var animal in sort)
             {
                 i++;
+
                 if(i <= 5)
                 {
                     Writer.WriteLine(animal.Name);
                 }
-            }
 
-            i = 0;
-            Writer.WriteLine();
-
-            foreach (var animal in sort)
-            {
-                i++;
                 if (i > 7)
                 {
+                    if (i == 8)
+                    {
+                        Writer.WriteLine();
+                    }
+
                     if (animal is Predator)
                         Writer.WriteLine("Predator");
-                    else if(animal is Vegetarian)
+                    else if (animal is Vegetarian)
                         Writer.WriteLine("Vegeterian");
                     else
                         Writer.WriteLine("Omnivores");
